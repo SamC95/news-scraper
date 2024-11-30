@@ -1,6 +1,6 @@
-package com.example.scraper.Games;
+package com.example.scraper.games;
 
-import com.example.scraper.Data.Patch;
+import com.example.scraper.data.Patch;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
@@ -14,7 +14,6 @@ public class FinalFantasyXIV {
   private final Patch topicFeed;
   private final Patch newsFeed;
   private final String fileName = "thumbnails/final-fantasy-xiv-meteor-logo.png";
-  private String thumbnail = "";
 
   public FinalFantasyXIV() {
     this.topicFeed = new Patch();
@@ -23,23 +22,24 @@ public class FinalFantasyXIV {
 
   private InputStream getFileFromResourceAsStream(String fileName) {
     ClassLoader classLoader = getClass().getClassLoader();
-    InputStream inputStream = classLoader.getResourceAsStream(fileName);
 
-    if (inputStream == null) {
-      throw new IllegalArgumentException("File not found!" + fileName);
-    }
-    else {
-      return inputStream;
-    }
+    return classLoader.getResourceAsStream(fileName);
   }
 
   public static void main(String[] args) {
     FinalFantasyXIV finalFantasyXIV = new FinalFantasyXIV();
+    InputStream thumbnailStream = null;
+
+    thumbnailStream = finalFantasyXIV.getFileFromResourceAsStream(finalFantasyXIV.fileName);
+
+    if (thumbnailStream == null) {
+      System.err.println("Couldn't find file: " + finalFantasyXIV.fileName);
+    }
+    else {
+      System.out.println("Thumbnail file: " + finalFantasyXIV.fileName + " loaded successfully.");
+    }
 
     try {
-      finalFantasyXIV.thumbnail =
-          finalFantasyXIV.getFileFromResourceAsStream(finalFantasyXIV.fileName).toString();
-
       finalFantasyXIV.getTopicInfo();
       finalFantasyXIV.getNewsInfo();
 
@@ -61,10 +61,10 @@ public class FinalFantasyXIV {
 
     if (entry != null) {
       var title = entry.select("title").text();
-      this.topicFeed.setTitle(title);
+      this.topicFeed.setTitle(title.isEmpty() ? "No title available" : title);
 
       var postLink = entry.select("link[rel=alternate]").attr("href");
-      this.topicFeed.setUrl(postLink);
+      this.topicFeed.setUrl(postLink.isEmpty() ? "No url found" : postLink);
 
       var contentHtml = entry.select("content").html();
       var decodedHtml = StringEscapeUtils.unescapeHtml4(contentHtml);
@@ -77,15 +77,18 @@ public class FinalFantasyXIV {
         this.topicFeed.setImage(imgUrl);
       }
       else {
-        System.out.println("No image found in Lodestone RSS Feed");
+        System.out.println("No image found");
       }
 
       var description = entry.select("summary").text();
       description = Jsoup.parse(description).text();
       description = truncateDescription(description, 300);
-      this.topicFeed.setDescription(description);
+      this.topicFeed.setDescription(description.isEmpty() ? "No description available" : description);
 
       var author = entry.select("author name").text();
+      if (author.isEmpty()) {
+        author = "No author found.";
+      }
       this.topicFeed.setAuthor(author);
     }
     else {
@@ -147,10 +150,7 @@ public class FinalFantasyXIV {
     if (description.length() > maxLength) {
       int lastSpace = description.lastIndexOf(" ", maxLength);
 
-      if (lastSpace == -1) { // If no space found, truncate at maximum length
-        lastSpace = maxLength;
-      }
-      return description.substring(0, lastSpace) + "..."; // Truncate and add ellipsis
+      return (lastSpace == -1 ? description.substring(0, maxLength) : description.substring(0, lastSpace)) + "...";
     }
     return description;
   }

@@ -1,4 +1,4 @@
-package com.example.scraper.Data;
+package com.example.scraper.data;
 
 public class Patch {
     private String author;
