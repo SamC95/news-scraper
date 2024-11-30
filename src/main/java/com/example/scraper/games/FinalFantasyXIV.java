@@ -1,6 +1,8 @@
 package com.example.scraper.games;
 
+import com.example.scraper.data.DescriptionBuilder;
 import com.example.scraper.data.Patch;
+import com.example.scraper.data.PostBuilder;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
@@ -10,7 +12,6 @@ import java.io.IOException;
 import java.io.InputStream;
 
 public class FinalFantasyXIV {
-  private final String name = "Final Fantasy XIV";
   private final Patch topicFeed;
   private final Patch newsFeed;
   private final String fileName = "thumbnails/final-fantasy-xiv-meteor-logo.png";
@@ -28,7 +29,7 @@ public class FinalFantasyXIV {
 
   public static void main(String[] args) {
     FinalFantasyXIV finalFantasyXIV = new FinalFantasyXIV();
-    InputStream thumbnailStream = null;
+    InputStream thumbnailStream;
 
     thumbnailStream = finalFantasyXIV.getFileFromResourceAsStream(finalFantasyXIV.fileName);
 
@@ -40,19 +41,20 @@ public class FinalFantasyXIV {
     }
 
     try {
-      finalFantasyXIV.getTopicInfo();
-      finalFantasyXIV.getNewsInfo();
+      finalFantasyXIV.getTopicFeed();
+      finalFantasyXIV.getNewsFeed();
 
-      finalFantasyXIV.displayPostInfo(finalFantasyXIV.topicFeed);
-      finalFantasyXIV.displayPostInfo(finalFantasyXIV.newsFeed);
+      PostBuilder.createNewsPost(finalFantasyXIV.topicFeed);
+      PostBuilder.createNewsPost(finalFantasyXIV.newsFeed);
 
-    } catch (Exception error) {
+    }
+    catch (Exception error) {
       System.out.println("Error: " + error.getMessage());
     }
   }
 
   // Gets data from Lodestone Topics RSS feed
-  public void getTopicInfo() throws IOException {
+  public void getTopicFeed() throws IOException {
     String url = "https://eu.finalfantasyxiv.com/lodestone/news/topics.xml";
 
     var doc = connect(url);
@@ -82,7 +84,7 @@ public class FinalFantasyXIV {
 
       var description = entry.select("summary").text();
       description = Jsoup.parse(description).text();
-      description = truncateDescription(description, 300);
+      description = DescriptionBuilder.truncateDescription(description, 300);
       this.topicFeed.setDescription(description.isEmpty() ? "No description available" : description);
 
       var author = entry.select("author name").text();
@@ -97,7 +99,7 @@ public class FinalFantasyXIV {
   }
 
   // Gets data from Lodestone News RSS feed
-  public void getNewsInfo() throws IOException {
+  public void getNewsFeed() throws IOException {
     String url = "https://eu.finalfantasyxiv.com/lodestone/news/news.xml";
 
     var doc = connect(url);
@@ -113,7 +115,7 @@ public class FinalFantasyXIV {
 
       var description = entry.select("content").text();
       description = Jsoup.parse(description).text();
-      description = truncateDescription(description, 100);
+      description = DescriptionBuilder.truncateDescription(description, 100);
       this.newsFeed.setDescription(description);
 
       var author = entry.select("author name").text();
@@ -124,19 +126,6 @@ public class FinalFantasyXIV {
     }
   }
 
-  private void displayPostInfo(Patch post) throws IOException {
-    System.out.println("Author: " + post.getAuthor());
-    System.out.println("Title: " + post.getTitle());
-    System.out.println("URL: " + post.getUrl());
-
-    // Only print image if not null -- Topic RSS should have images, news RSS should not
-    if (post.getImage() != null) {
-      System.out.println("Image: " + post.getImage());
-    }
-
-    System.out.println("Description: " + post.getDescription() + "\n");
-  }
-
   private Document connect(String url) throws IOException {
     try {
         return Jsoup.connect(url).userAgent("Mozilla/5.0").get();
@@ -144,14 +133,5 @@ public class FinalFantasyXIV {
     catch (IOException error) {
       throw new IOException("Couldn't connect to Lodestone RSS Feed: " + error.getMessage());
     }
-  }
-
-  private String truncateDescription(String description, int maxLength) {
-    if (description.length() > maxLength) {
-      int lastSpace = description.lastIndexOf(" ", maxLength);
-
-      return (lastSpace == -1 ? description.substring(0, maxLength) : description.substring(0, lastSpace)) + "...";
-    }
-    return description;
   }
 }
