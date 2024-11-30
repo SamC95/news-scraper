@@ -1,9 +1,11 @@
-package com.example.scraper.data;
+package com.example.scraper.utils;
+
+import com.example.scraper.model.Update;
 
 import java.io.IOException;
 
 public class PostBuilder {
-  public static void createNewsPost(Patch post) throws IOException {
+  public static void createNewsPost(Update post) throws IOException {
     if (post.getAuthor() != null) {
       System.out.println("Author: " + post.getAuthor());
     }

@@ -1,20 +1,21 @@
-package com.example.scraper.data;
+package com.example.scraper.utils;
 
+import com.example.scraper.model.Update;
 import org.jsoup.nodes.Element;
 
 public class DescriptionBuilder {
   StringBuilder descBuilder = new StringBuilder();
   String shortString = "";
 
-  public DescriptionBuilder(Element description, Patch patch) {
+  public DescriptionBuilder(Element description, Update update) {
     buildDescription(description);
 
     if (description != null) {
       if (descBuilder.length() > 300) {
         shortString = descBuilder.substring(0, 299) + "...";
-        patch.setDescription(shortString);
+        update.setDescription(shortString);
       } else {
-        patch.setDescription(descBuilder.toString());
+        update.setDescription(descBuilder.toString());
       }
     }
   }

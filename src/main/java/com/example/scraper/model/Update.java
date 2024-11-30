@@ -1,6 +1,6 @@
-package com.example.scraper.data;
+package com.example.scraper.model;
 
-public class Patch {
+public class Update {
     private String author;
     private String title;
     private String url;

@@ -1,8 +1,8 @@
-package com.example.scraper.games;
+package com.example.scraper.data;
 
-import com.example.scraper.data.DescriptionBuilder;
-import com.example.scraper.data.Patch;
-import com.example.scraper.data.PostBuilder;
+import com.example.scraper.utils.DescriptionBuilder;
+import com.example.scraper.model.Update;
+import com.example.scraper.utils.PostBuilder;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
@@ -10,10 +10,10 @@ import org.jsoup.nodes.Element;
 import java.io.IOException;
 
 public class WarThunder {
-  private final Patch newsFeed;
+  private final Update newsFeed;
 
   public WarThunder() {
-    this.newsFeed = new Patch();
+    this.newsFeed = new Update();
   }
 
   public static void main(String[] args) {

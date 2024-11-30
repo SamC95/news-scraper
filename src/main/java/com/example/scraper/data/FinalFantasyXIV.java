@@ -1,8 +1,8 @@
-package com.example.scraper.games;
+package com.example.scraper.data;
 
-import com.example.scraper.data.DescriptionBuilder;
-import com.example.scraper.data.Patch;
-import com.example.scraper.data.PostBuilder;
+import com.example.scraper.utils.DescriptionBuilder;
+import com.example.scraper.model.Update;
+import com.example.scraper.utils.PostBuilder;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
@@ -12,13 +12,13 @@ import java.io.IOException;
 import java.io.InputStream;
 
 public class FinalFantasyXIV {
-  private final Patch topicFeed;
-  private final Patch newsFeed;
+  private final Update topicFeed;
+  private final Update newsFeed;
   private final String fileName = "thumbnails/final-fantasy-xiv-meteor-logo.png";
 
   public FinalFantasyXIV() {
-    this.topicFeed = new Patch();
-    this.newsFeed = new Patch();
+    this.topicFeed = new Update();
+    this.newsFeed = new Update();
   }
 
   private InputStream getFileFromResourceAsStream(String fileName) {

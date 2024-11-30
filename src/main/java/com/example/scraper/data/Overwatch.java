@@ -1,8 +1,8 @@
-package com.example.scraper.games;
+package com.example.scraper.data;
 
-import com.example.scraper.data.DescriptionBuilder;
-import com.example.scraper.data.Patch;
-import com.example.scraper.data.PostBuilder;
+import com.example.scraper.utils.DescriptionBuilder;
+import com.example.scraper.model.Update;
+import com.example.scraper.utils.PostBuilder;
 import org.jsoup.*;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
@@ -10,11 +10,11 @@ import org.jsoup.nodes.Element;
 import java.io.IOException;
 
 public class Overwatch {
-  private final Patch patch;
+  private final Update update;
   private final String thumbnail = "https://i.imgur.com/NDhNeBj.png";
 
   public Overwatch() {
-    this.patch = new Patch();
+    this.update = new Update();
   }
 
   public static void main(String[] args) {
@@ -22,7 +22,7 @@ public class Overwatch {
 
     try {
       overwatch.getNewsFeed();
-      PostBuilder.createNewsPost(overwatch.patch);
+      PostBuilder.createNewsPost(overwatch.update);
     } catch (Exception error) {
       System.out.println("Error: " + error.getMessage());
     }
@@ -44,16 +44,16 @@ public class Overwatch {
       if (mostRecentUpdate != null) {
         Element title = doc.selectFirst("h3.PatchNotes-patchTitle");
           assert title != null;
-          this.patch.setTitle(title.text());
+          this.update.setTitle(title.text());
 
         Element pageLink = doc.selectFirst("div.PatchNotesTop blz-button");
         assert pageLink != null;
-        this.patch.setUrl(
+        this.update.setUrl(
             "https://overwatch.blizzard.com/en-us/news/patch-notes/live/" + pageLink.attr("href"));
 
         Element patchDescription = mostRecentUpdate.selectFirst("div.PatchNotes-sectionDescription");
 
-        new DescriptionBuilder(patchDescription, patch);
+        new DescriptionBuilder(patchDescription, update);
       }
     }
     catch (Exception e) {
