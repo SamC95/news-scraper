@@ -2,6 +2,7 @@ package com.example.scraper.games;
 
 import com.example.scraper.data.DescriptionBuilder;
 import com.example.scraper.data.Patch;
+import com.example.scraper.data.PostBuilder;
 import org.jsoup.*;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
@@ -9,7 +10,6 @@ import org.jsoup.nodes.Element;
 import java.io.IOException;
 
 public class Overwatch {
-  private final String name = "Overwatch";
   private final Patch patch;
   private final String thumbnail = "https://i.imgur.com/NDhNeBj.png";
 
@@ -21,14 +21,14 @@ public class Overwatch {
     Overwatch overwatch = new Overwatch();
 
     try {
-      overwatch.getPatchInfo();
-      overwatch.displayPostInfo();
+      overwatch.getNewsFeed();
+      PostBuilder.createNewsPost(overwatch.patch);
     } catch (Exception error) {
       System.out.println("Error: " + error.getMessage());
     }
   }
 
-  public void getPatchInfo() throws IOException {
+  public void getNewsFeed() throws IOException {
     String url = "https://playoverwatch.com/en-us/news/patch-notes/pc/";
     Document doc;
 
@@ -55,17 +55,9 @@ public class Overwatch {
 
         new DescriptionBuilder(patchDescription, patch);
       }
-    } catch (Exception e) {
-      throw new RuntimeException(e);
     }
-  }
-
-  private void displayPostInfo() {
-    System.out.println("Patch Title: " + this.patch.getTitle());
-    System.out.println("Patch URL: " + this.patch.getUrl());
-
-    if (this.patch.getDescription() != null && !this.patch.getDescription().trim().isEmpty()) {
-      System.out.println("Patch Description: " + this.patch.getDescription().trim());
+    catch (Exception e) {
+      throw new RuntimeException(e);
     }
   }
 }

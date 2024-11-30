@@ -9,12 +9,13 @@ public class DescriptionBuilder {
   public DescriptionBuilder(Element description, Patch patch) {
     buildDescription(description);
 
-    if (descBuilder.length() > 400) {
-      shortString = descBuilder.substring(0, 399) + "...";
-      patch.setDescription(shortString);
-    }
-    else {
-      patch.setDescription(descBuilder.toString());
+    if (description != null) {
+      if (descBuilder.length() > 300) {
+        shortString = descBuilder.substring(0, 299) + "...";
+        patch.setDescription(shortString);
+      } else {
+        patch.setDescription(descBuilder.toString());
+      }
     }
   }
 
@@ -31,8 +32,20 @@ public class DescriptionBuilder {
   }
 
   private String findBetween(String s, String first, String last) {
-     int start = s.indexOf(first) + first.length();
-      int end = s.indexOf(last, start);
-      return s.substring(start, end);
+    int start = s.indexOf(first) + first.length();
+    int end = s.indexOf(last, start);
+    return s.substring(start, end);
+  }
+
+  public static String truncateDescription(String description, int maxLength) {
+    if (description.length() > maxLength) {
+      int lastSpace = description.lastIndexOf(" ", maxLength);
+
+      return (lastSpace == -1
+              ? description.substring(0, maxLength)
+              : description.substring(0, lastSpace))
+          + "...";
+    }
+    return description;
   }
 }
