@@ -1,4 +1,4 @@
-package com.example.scraper.Data;
+package com.example.scraper.data;
 
 import org.jsoup.nodes.Element;
 

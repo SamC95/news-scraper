@@ -1,7 +1,7 @@
-package com.example.scraper.Games;
+package com.example.scraper.games;
 
-import com.example.scraper.Data.DescriptionBuilder;
-import com.example.scraper.Data.Patch;
+import com.example.scraper.data.DescriptionBuilder;
+import com.example.scraper.data.Patch;
 import org.jsoup.*;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
