@@ -2,9 +2,9 @@ package com.example.scraper.data;
 
 import com.example.scraper.utils.DescriptionBuilder;
 import com.example.scraper.model.Update;
+import com.example.scraper.utils.JsoupConnector;
 import com.example.scraper.utils.PostBuilder;
 import org.jsoup.Jsoup;
-import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 
 import java.io.IOException;
@@ -32,7 +32,7 @@ public class WarThunder {
   public void getNewsFeed() throws IOException {
     String url = "https://warthunder.com/en/news";
 
-    var doc = connect(url);
+    var doc = JsoupConnector.connect(url, "warthunder.com");
 
     Element entry = doc.selectFirst("div.showcase__item.widget");
 
@@ -74,15 +74,6 @@ public class WarThunder {
     }
     else {
       System.out.println("No entries found on warthunder.com");
-    }
-  }
-
-  private Document connect(String url) throws IOException {
-    try {
-      return Jsoup.connect(url).userAgent("Mozilla/5.0").get();
-    }
-    catch (IOException error) {
-      throw new IOException("Couldn't connect to warthunder.com: " + error.getMessage());
     }
   }
 }

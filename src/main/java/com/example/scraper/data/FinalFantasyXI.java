@@ -2,9 +2,9 @@ package com.example.scraper.data;
 
 import com.example.scraper.utils.DescriptionBuilder;
 import com.example.scraper.model.Update;
+import com.example.scraper.utils.JsoupConnector;
 import com.example.scraper.utils.PostBuilder;
 import org.jsoup.Jsoup;
-import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 
 import java.io.IOException;
@@ -36,7 +36,7 @@ public class FinalFantasyXI {
     public void getTopicFeed() throws IOException {
         String url = "http://www.playonline.com/pcd/topics/ff11eu/topics.xml";
 
-        var doc = connect(url);
+        var doc = JsoupConnector.connect(url, "PlayOnline RSS Feed");
 
         Element entry = doc.select("item").first();
 
@@ -55,7 +55,7 @@ public class FinalFantasyXI {
 
         url = "http://www.playonline.com/ff11eu/index.shtml";
 
-        doc = connect(url);
+        doc = JsoupConnector.connect(url, "PlayOnline RSS Feed");
 
         Element mostRecentUpdate = doc.selectFirst("p.tx_topics > a > img");
 
@@ -68,7 +68,7 @@ public class FinalFantasyXI {
     public void getInformationFeed() throws IOException {
         String url = "http://www.playonline.com/ff11eu/polnews/news.xml";
 
-        var doc = connect(url);
+        var doc = JsoupConnector.connect(url, "PlayOnline RSS Feed");
 
         Element entry = doc.select("item").first();
 
@@ -86,15 +86,6 @@ public class FinalFantasyXI {
         }
         else {
             System.out.println("No entries found in PlayOnline RSS Feed");
-        }
-    }
-
-    private Document connect(String url) throws IOException {
-        try {
-            return Jsoup.connect(url).userAgent("Mozilla/5.0").get();
-        }
-        catch (IOException error) {
-            throw new IOException("Couldn't connect to PlayOnline RSS Feed: " + error.getMessage());
         }
     }
 }

@@ -2,8 +2,8 @@ package com.example.scraper.data;
 
 import com.example.scraper.utils.DescriptionBuilder;
 import com.example.scraper.model.Update;
+import com.example.scraper.utils.JsoupConnector;
 import com.example.scraper.utils.PostBuilder;
-import org.jsoup.*;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 
@@ -32,11 +32,7 @@ public class Overwatch {
     String url = "https://playoverwatch.com/en-us/news/patch-notes/pc/";
     Document doc;
 
-    try {
-      doc = Jsoup.connect(url).userAgent("Mozilla/5.0").get();
-    } catch (IOException error) {
-      throw new IOException("Couldn't connect to https://playoverwatch.com");
-    }
+    doc = JsoupConnector.connect(url, "playoverwatch.com");
 
     try {
       Element mostRecentUpdate = doc.selectFirst("div.PatchNotes-patch.PatchNotes-live");
