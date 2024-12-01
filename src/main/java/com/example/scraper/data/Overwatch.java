@@ -11,14 +11,16 @@ import java.io.IOException;
 
 public class Overwatch {
   private final Update update;
+  private final JsoupConnector jsoupConnector;
   private final String thumbnail = "https://i.imgur.com/NDhNeBj.png";
 
-  public Overwatch() {
+  public Overwatch(JsoupConnector jsoupConnector) {
     this.update = new Update();
+    this.jsoupConnector = jsoupConnector;
   }
 
   public static void main(String[] args) {
-    Overwatch overwatch = new Overwatch();
+    Overwatch overwatch = new Overwatch(new JsoupConnector());
 
     try {
       overwatch.getNewsFeed();
@@ -32,7 +34,7 @@ public class Overwatch {
     String url = "https://playoverwatch.com/en-us/news/patch-notes/pc/";
     Document doc;
 
-    doc = JsoupConnector.connect(url, "playoverwatch.com");
+    doc = jsoupConnector.connect(url, "playoverwatch.com");
 
     try {
       Element mostRecentUpdate = doc.selectFirst("div.PatchNotes-patch.PatchNotes-live");

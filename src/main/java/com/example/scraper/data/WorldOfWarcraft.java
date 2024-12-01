@@ -11,13 +11,15 @@ import java.io.IOException;
 
 public class WorldOfWarcraft {
   private final Update newsFeed;
+  private final JsoupConnector jsoupConnector;
 
-  public WorldOfWarcraft() {
+  public WorldOfWarcraft(JsoupConnector jsoupConnector) {
     this.newsFeed = new Update();
+    this.jsoupConnector = jsoupConnector;
   }
 
   public static void main(String[] args) {
-    WorldOfWarcraft worldOfWarcraft = new WorldOfWarcraft();
+    WorldOfWarcraft worldOfWarcraft = new WorldOfWarcraft(new JsoupConnector());
 
     try {
       worldOfWarcraft.getNewsFeed();
@@ -32,7 +34,7 @@ public class WorldOfWarcraft {
   public void getNewsFeed() throws IOException {
     String url = "https://worldofwarcraft.blizzard.com/en-gb/news";
 
-    var doc = JsoupConnector.connect(url, "worldofwarcraft.blizzard.com");
+    var doc = jsoupConnector.connect(url, "worldofwarcraft.blizzard.com");
 
     Element entry = doc.selectFirst("div.List-item");
 

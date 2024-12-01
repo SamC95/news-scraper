@@ -11,10 +11,10 @@ Since Steam's RSS feed is consistent in structure across different products,
 a pre-defined class for games where we're retrieving data via the Steam News Hub RSS feed is utilised.
 */
 public class SteamRSSParser {
-  public static void getSteamRSSNewsFeed(String gameId, Update newsFeed) throws IOException {
+  public static void getSteamRSSNewsFeed(String gameId, Update newsFeed, JsoupConnector jsoupConnector) throws IOException {
     String url = "https://store.steampowered.com/feeds/news/app/" + gameId + "/?cc=GB&l=english";
 
-    var doc = JsoupConnector.connect(url, "Steam news hub RSS feed (id: " + gameId + ")");
+    var doc = jsoupConnector.connect(url, "Steam news hub RSS feed (id: " + gameId + ")");
 
     Element entry = doc.select("item").first();
 

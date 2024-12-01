@@ -12,14 +12,16 @@ import java.io.IOException;
 public class FinalFantasyXI {
     private final Update topicFeed;
     private final Update informationFeed;
+    private final JsoupConnector jsoupConnector;
 
-    public FinalFantasyXI() {
+    public FinalFantasyXI(JsoupConnector jsoupConnector) {
         this.topicFeed = new Update();
         this.informationFeed = new Update();
+        this.jsoupConnector = jsoupConnector;
     }
 
     public static void main(String[] args) {
-        FinalFantasyXI finalFantasyXI = new FinalFantasyXI();
+        FinalFantasyXI finalFantasyXI = new FinalFantasyXI(new JsoupConnector());
 
         try {
             finalFantasyXI.getTopicFeed();
@@ -36,7 +38,7 @@ public class FinalFantasyXI {
     public void getTopicFeed() throws IOException {
         String url = "http://www.playonline.com/pcd/topics/ff11eu/topics.xml";
 
-        var doc = JsoupConnector.connect(url, "PlayOnline RSS Feed");
+        var doc = jsoupConnector.connect(url, "PlayOnline RSS Feed");
 
         Element entry = doc.select("item").first();
 
@@ -55,7 +57,7 @@ public class FinalFantasyXI {
 
         url = "http://www.playonline.com/ff11eu/index.shtml";
 
-        doc = JsoupConnector.connect(url, "PlayOnline RSS Feed");
+        doc = jsoupConnector.connect(url, "PlayOnline RSS Feed");
 
         Element mostRecentUpdate = doc.selectFirst("p.tx_topics > a > img");
 
@@ -68,7 +70,7 @@ public class FinalFantasyXI {
     public void getInformationFeed() throws IOException {
         String url = "http://www.playonline.com/ff11eu/polnews/news.xml";
 
-        var doc = JsoupConnector.connect(url, "PlayOnline RSS Feed");
+        var doc = jsoupConnector.connect(url, "PlayOnline RSS Feed");
 
         Element entry = doc.select("item").first();
 

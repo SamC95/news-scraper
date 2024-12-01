@@ -11,13 +11,15 @@ import java.io.IOException;
 
 public class WarThunder {
   private final Update newsFeed;
+  private final JsoupConnector jsoupConnector;
 
-  public WarThunder() {
+  public WarThunder(JsoupConnector jsoupConnector) {
     this.newsFeed = new Update();
+    this.jsoupConnector = jsoupConnector;
   }
 
   public static void main(String[] args) {
-    WarThunder warThunder = new WarThunder();
+    WarThunder warThunder = new WarThunder(new JsoupConnector());
 
     try {
       warThunder.getNewsFeed();
@@ -32,7 +34,7 @@ public class WarThunder {
   public void getNewsFeed() throws IOException {
     String url = "https://warthunder.com/en/news";
 
-    var doc = JsoupConnector.connect(url, "warthunder.com");
+    var doc = jsoupConnector.connect(url, "warthunder.com");
 
     Element entry = doc.selectFirst("div.showcase__item.widget");
 

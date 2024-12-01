@@ -11,13 +11,15 @@ import java.io.IOException;
 
 public class TheOldRepublic {
     private final Update newsFeed;
+    private final JsoupConnector jsoupConnector;
 
-    public TheOldRepublic() {
+    public TheOldRepublic(JsoupConnector jsoupConnector) {
         this.newsFeed = new Update();
+        this.jsoupConnector = jsoupConnector;
     }
 
     public static void main(String[] args) {
-        TheOldRepublic theOldRepublic = new TheOldRepublic();
+        TheOldRepublic theOldRepublic = new TheOldRepublic(new JsoupConnector());
 
         try {
             theOldRepublic.getNewsFeed();
@@ -32,7 +34,7 @@ public class TheOldRepublic {
     public void getNewsFeed() throws IOException {
         String url = "https://www.swtor.com/info/news";
 
-        var doc = JsoupConnector.connect(url, "swtor.com");
+        var doc = jsoupConnector.connect(url, "swtor.com");
 
         Element entry = doc.selectFirst("div.newsItem.new");
 

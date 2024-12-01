@@ -15,11 +15,13 @@ import java.io.InputStream;
 public class FinalFantasyXIV {
   private final Update topicFeed;
   private final Update newsFeed;
+  private final JsoupConnector jsoupConnector;
   private final String fileName = "thumbnails/final-fantasy-xiv-meteor-logo.png";
 
-  public FinalFantasyXIV() {
+  public FinalFantasyXIV(JsoupConnector jsoupConnector) {
     this.topicFeed = new Update();
     this.newsFeed = new Update();
+    this.jsoupConnector = jsoupConnector;
   }
 
   private InputStream getFileFromResourceAsStream(String fileName) {
@@ -29,7 +31,7 @@ public class FinalFantasyXIV {
   }
 
   public static void main(String[] args) {
-    FinalFantasyXIV finalFantasyXIV = new FinalFantasyXIV();
+    FinalFantasyXIV finalFantasyXIV = new FinalFantasyXIV(new JsoupConnector());
     InputStream thumbnailStream;
 
     thumbnailStream = finalFantasyXIV.getFileFromResourceAsStream(finalFantasyXIV.fileName);
@@ -58,7 +60,7 @@ public class FinalFantasyXIV {
   public void getTopicFeed() throws IOException {
     String url = "https://eu.finalfantasyxiv.com/lodestone/news/topics.xml";
 
-    var doc = JsoupConnector.connect(url, "Lodestone RSS Feed");
+    var doc = jsoupConnector.connect(url, "Lodestone RSS Feed");
 
     Element entry = doc.select("entry").first();
 
@@ -103,7 +105,7 @@ public class FinalFantasyXIV {
   public void getNewsFeed() throws IOException {
     String url = "https://eu.finalfantasyxiv.com/lodestone/news/news.xml";
 
-    var doc = JsoupConnector.connect(url, "Lodestone RSS Feed");
+    var doc = jsoupConnector.connect(url, "Lodestone RSS Feed");
 
     Element entry = doc.select("entry").first();
 
