@@ -10,6 +10,7 @@ import org.junit.jupiter.api.extension.ExtendWith;
 
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
+import utils.FieldValueHelper;
 
 import java.io.IOException;
 import java.lang.reflect.Field;
@@ -24,6 +25,16 @@ public class WorldOfWarcraftTest {
 
   @Mock private JsoupConnector jsoupConnector;
 
+  String mockHtml =
+          """
+                  <div class="List-item">
+                      <div class="NewsBlog-title">New Expansion Announced</div>
+                      <a class="Link NewsBlog-link" href="/news/123456">Read more</a>
+                      <img class="NewsBlog-image" data-src="//cdn.blizzard.com/news-image.jpg" />
+                      <p class="NewsBlog-desc">Blizzard announces a new expansion for World of Warcraft...</p>
+                  </div>
+                  """;
+
   @BeforeEach
   void setUp() {
     worldOfWarcraft = new WorldOfWarcraft(jsoupConnector);
@@ -32,16 +43,6 @@ public class WorldOfWarcraftTest {
   @Test
   public void getNewsFeedShouldCorrectlyProvideResponse()
       throws IOException, NoSuchFieldException, IllegalAccessException {
-    String mockHtml =
-        """
-                <div class="List-item">
-                    <div class="NewsBlog-title">New Expansion Announced</div>
-                    <a class="Link NewsBlog-link" href="/news/123456">Read more</a>
-                    <img class="NewsBlog-image" data-src="//cdn.blizzard.com/news-image.jpg" />
-                    <p class="NewsBlog-desc">Blizzard announces a new expansion for World of Warcraft...</p>
-                </div>
-                """;
-
     Document mockDoc = Parser.parse(mockHtml, "https://worldofwarcraft.blizzard.com");
 
     when(jsoupConnector.connect(
@@ -54,21 +55,18 @@ public class WorldOfWarcraftTest {
     newsFeedField.setAccessible(true);
     var newsFeed = newsFeedField.get(worldOfWarcraft);
 
-    assertEquals("New Expansion Announced", getFieldValue(newsFeed, "title"));
+    assertEquals("New Expansion Announced", FieldValueHelper.getFieldValue(newsFeed, "title"));
 
     assertEquals(
-        "https://worldofwarcraft.blizzard.com/en-gb/news/123456", getFieldValue(newsFeed, "url"));
+        "https://worldofwarcraft.blizzard.com/en-gb/news/123456",
+        FieldValueHelper.getFieldValue(newsFeed, "url"));
 
-    assertEquals("https://cdn.blizzard.com/news-image.jpg", getFieldValue(newsFeed, "image"));
+    assertEquals(
+        "https://cdn.blizzard.com/news-image.jpg",
+        FieldValueHelper.getFieldValue(newsFeed, "image"));
 
     assertEquals(
         "Blizzard announces a new expansion for World of Warcraft...",
-        getFieldValue(newsFeed, "description"));
-  }
-
-  private String getFieldValue(Object obj, String fieldName) throws NoSuchFieldException, IllegalAccessException {
-    Field field = obj.getClass().getDeclaredField(fieldName);
-    field.setAccessible(true);
-    return (String) field.get(obj);
+        FieldValueHelper.getFieldValue(newsFeed, "description"));
   }
 }
