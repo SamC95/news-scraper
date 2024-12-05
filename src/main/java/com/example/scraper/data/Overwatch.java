@@ -10,7 +10,7 @@ import org.jsoup.nodes.Element;
 import java.io.IOException;
 
 public class Overwatch {
-  private final Update update;
+  public final Update update;
   private final JsoupConnector jsoupConnector;
   private final String thumbnail = "https://i.imgur.com/NDhNeBj.png";
 

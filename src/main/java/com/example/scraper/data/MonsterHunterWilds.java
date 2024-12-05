@@ -11,7 +11,7 @@ import java.io.IOException;
 Utilising Monster Hunter Wilds Steam news page to retrieve posts
  */
 public class MonsterHunterWilds {
-  private final Update newsFeed;
+  public final Update newsFeed;
   private final JsoupConnector jsoupConnector;
 
   public MonsterHunterWilds(JsoupConnector jsoupConnector) {

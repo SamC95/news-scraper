@@ -10,8 +10,8 @@ import org.jsoup.nodes.Element;
 import java.io.IOException;
 
 public class FinalFantasyXI {
-    private final Update topicFeed;
-    private final Update informationFeed;
+    public final Update topicFeed;
+    public final Update informationFeed;
     private final JsoupConnector jsoupConnector;
 
     public FinalFantasyXI(JsoupConnector jsoupConnector) {

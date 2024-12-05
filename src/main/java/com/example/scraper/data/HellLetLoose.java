@@ -11,7 +11,7 @@ import java.io.IOException;
 Hell Let Loose does not have a dedicated news page on its website, so Steam's news hub RSS feed is being used instead
 */
 public class HellLetLoose {
-  private final Update newsFeed;
+  public final Update newsFeed;
   private final JsoupConnector jsoupConnector;
 
   public HellLetLoose(JsoupConnector jsoupConnector) {

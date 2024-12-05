@@ -10,7 +10,7 @@ import org.jsoup.nodes.Element;
 import java.io.IOException;
 
 public class WarThunder {
-  private final Update newsFeed;
+  public final Update newsFeed;
   private final JsoupConnector jsoupConnector;
 
   public WarThunder(JsoupConnector jsoupConnector) {

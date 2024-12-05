@@ -13,8 +13,8 @@ import java.io.IOException;
 import java.io.InputStream;
 
 public class FinalFantasyXIV {
-  private final Update topicFeed;
-  private final Update newsFeed;
+  public final Update topicFeed;
+  public final Update newsFeed;
   private final JsoupConnector jsoupConnector;
   private final String fileName = "thumbnails/final-fantasy-xiv-meteor-logo.png";
 
