@@ -12,7 +12,7 @@ Hell Let Loose does not have a dedicated news page on its website, so Steam's ne
 */
 public class HellLetLoose {
   public final Update newsFeed;
-  private final JsoupConnector jsoupConnector;
+  public final JsoupConnector jsoupConnector;
 
   public HellLetLoose(JsoupConnector jsoupConnector) {
     this.newsFeed = new Update();

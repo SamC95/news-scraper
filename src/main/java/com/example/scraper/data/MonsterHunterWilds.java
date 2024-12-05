@@ -12,7 +12,7 @@ Utilising Monster Hunter Wilds Steam news page to retrieve posts
  */
 public class MonsterHunterWilds {
   public final Update newsFeed;
-  private final JsoupConnector jsoupConnector;
+  public final JsoupConnector jsoupConnector;
 
   public MonsterHunterWilds(JsoupConnector jsoupConnector) {
     this.newsFeed = new Update();
