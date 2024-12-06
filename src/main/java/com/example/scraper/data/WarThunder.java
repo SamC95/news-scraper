@@ -6,6 +6,7 @@ import com.example.scraper.utils.JsoupConnector;
 import com.example.scraper.utils.PostBuilder;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Element;
+import org.jsoup.select.Elements;
 
 import java.io.IOException;
 
@@ -33,10 +34,15 @@ public class WarThunder {
 
   public void getNewsFeed() throws IOException {
     String url = "https://warthunder.com/en/news";
+    Element entry = null;
 
     var doc = jsoupConnector.connect(url, "warthunder.com");
 
-    Element entry = doc.selectFirst("div.showcase__item.widget");
+    Elements entries = doc.select("div.showcase__item.widget");
+
+    if (entries.size() > 1) {
+       entry = entries.get(1);
+    }
 
     if (entry != null) {
       var title = entry.select("div.widget__title").text();
