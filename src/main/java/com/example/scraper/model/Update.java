@@ -6,6 +6,7 @@ public class Update {
     private String url;
     private String image;
     private String description;
+    private String category;
 
     public void setAuthor(String author) {
         this.author = author;
@@ -27,6 +28,10 @@ public class Update {
         this.description = description;
     }
 
+    public void setCategory(String category) {
+        this.category = category;
+    }
+
     public String getAuthor() {
         return author;
     }
@@ -45,5 +50,9 @@ public class Update {
 
     public String getDescription() {
         return description;
+    }
+
+    public String getCategory() {
+        return category;
     }
 }
