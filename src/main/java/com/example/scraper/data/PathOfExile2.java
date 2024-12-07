@@ -8,8 +8,8 @@ import com.example.scraper.utils.SteamRSSParser;
 import java.io.IOException;
 
 public class PathOfExile2 {
-    private final Update newsFeed;
-    private final JsoupConnector jsoupConnector;
+    public final Update newsFeed;
+    public final JsoupConnector jsoupConnector;
 
     public PathOfExile2(JsoupConnector jsoupConnector) {
         this.newsFeed = new Update();
