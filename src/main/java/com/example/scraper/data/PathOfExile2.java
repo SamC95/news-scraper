@@ -52,8 +52,8 @@ public class PathOfExile2 {
             this.patchFeed.setAuthor(author.isEmpty() ? "No author found" : author);
 
             // These posts do not have images or descriptions so we simply set them as below
-            this.patchFeed.setImage("");
-            this.patchFeed.setDescription("");
+            this.patchFeed.setImage("No image found");
+            this.patchFeed.setDescription("No description available");
         }
     }
 }
