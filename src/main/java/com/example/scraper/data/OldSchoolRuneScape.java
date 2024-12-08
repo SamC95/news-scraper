@@ -53,6 +53,11 @@ public class OldSchoolRuneScape {
 
             var description = entry.select("p.news-list-article__summary").text();
             description = Jsoup.parse(description).text();
+
+            description = description.replace("\u0092", "'");
+            description = description.replace("\u0085", "...");
+            description = description.replace("read more", "");
+
             description = DescriptionBuilder.truncateDescription(description, 300);
             this.newsFeed.setDescription(description.isEmpty() ? "No description available": description);
         }

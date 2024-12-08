@@ -8,7 +8,7 @@ import java.io.IOException;
 public class JsoupConnector {
     public Document connect(String url, String domain) throws IOException {
         try {
-            return Jsoup.connect(url).userAgent("Mozilla/5.0").get();
+            return Jsoup.connect(url).userAgent("Mozilla").get();
         }
         catch (IOException error) {
             throw new IOException("Couldn't connect to " + domain + ": " + error.getMessage());
