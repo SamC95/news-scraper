@@ -57,9 +57,9 @@ public class WarThunderTest {
     when(jsoupConnector.connect("https://warthunder.com/en/news", "warthunder.com"))
         .thenReturn(mockDoc);
 
-    warThunder.getNewsFeed();
+    warThunder.getPinnedNews();
 
-    Field newsFeedField = WarThunder.class.getDeclaredField("newsFeed");
+    Field newsFeedField = WarThunder.class.getDeclaredField("pinnedNewsFeed");
     newsFeedField.setAccessible(true);
     var newsFeed = newsFeedField.get(warThunder);
 

@@ -19,13 +19,11 @@ public class NewsScraperApplication {
         FinalFantasyXI finalFantasyXI = new FinalFantasyXI(new JsoupConnector());
 
         finalFantasyXI.getTopicFeed();
-
         finalFantasyXI.getInformationFeed();
 
         FinalFantasyXIV finalFantasyXIV = new FinalFantasyXIV(new JsoupConnector());
 
         finalFantasyXIV.getTopicFeed();
-
         finalFantasyXIV.getNewsFeed();
 
         HellLetLoose hellLetLoose = new HellLetLoose(new JsoupConnector());
@@ -53,7 +51,8 @@ public class NewsScraperApplication {
 
         WarThunder warThunder = new WarThunder(new JsoupConnector());
 
-        warThunder.getNewsFeed();
+        warThunder.getPinnedNews();
+        warThunder.getUnpinnedNews();
 
         WorldOfWarcraft worldOfWarcraft = new WorldOfWarcraft(new JsoupConnector());
 
