@@ -11,6 +11,7 @@ import org.apache.commons.text.StringEscapeUtils;
 
 import java.io.IOException;
 import java.io.InputStream;
+import java.time.LocalTime;
 
 public class FinalFantasyXIV {
   public final Update topicFeed;
@@ -97,7 +98,7 @@ public class FinalFantasyXIV {
       this.topicFeed.setAuthor(author);
     }
     else {
-      System.out.println("No entries found in Lodestone RSS Feed");
+      System.out.printf("[%s] [INFO] No entries found in Lodestone RSS Feed", LocalTime.now());
     }
   }
 
@@ -125,7 +126,7 @@ public class FinalFantasyXIV {
       this.newsFeed.setAuthor(author);
     }
     else {
-      System.out.println("No entries found in Lodestone RSS Feed");
+      System.out.printf("[%s] [INFO] No entries found in Lodestone RSS Feed", LocalTime.now());
     }
   }
 }

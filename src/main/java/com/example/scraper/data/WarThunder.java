@@ -10,6 +10,7 @@ import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
 
 import java.io.IOException;
+import java.time.LocalTime;
 
 public class WarThunder {
   public final Update pinnedNewsFeed;
@@ -75,7 +76,7 @@ public class WarThunder {
           description.isEmpty() ? "No description available" : description);
     }
     else {
-      System.out.println("No entries found on warthunder.com");
+      System.out.printf("[%s] [INFO] No entries found on warthunder.com", LocalTime.now());
     }
   }
 
@@ -88,7 +89,7 @@ public class WarThunder {
       getNewsFeed(pinnedEntry, pinnedNewsFeed);
     }
     else {
-      System.out.println("No pinned entries found on warthunder.com");
+      System.out.printf("[%s] [INFO] No pinned entries found on warthunder.com", LocalTime.now());
     }
   }
 
@@ -100,7 +101,7 @@ public class WarThunder {
     if (unpinnedEntry != null) {
       getNewsFeed(unpinnedEntry, unpinnedNewsFeed);
     } else {
-      System.out.println("No unpinned entries found on warthunder.com");
+      System.out.printf("[%s] [INFO] No unpinned entries found on warthunder.com", LocalTime.now());
     }
   }
 

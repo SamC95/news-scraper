@@ -8,6 +8,7 @@ import org.jsoup.Jsoup;
 import org.jsoup.nodes.Element;
 
 import java.io.IOException;
+import java.time.LocalTime;
 
 public class FinalFantasyXI {
     public final Update topicFeed;
@@ -87,7 +88,7 @@ public class FinalFantasyXI {
             this.informationFeed.setDescription(description.isEmpty() ? "No description available" : description);
         }
         else {
-            System.out.println("No entries found in PlayOnline RSS Feed");
+            System.out.printf("[%s] [INFO] No entries found in PlayOnline RSS Feed", LocalTime.now());
         }
     }
 }
