@@ -10,8 +10,6 @@ public class JsoupConnector {
   public Document connect(String url, String domain) throws IOException {
     String randomUserAgent = getUserAgent();
 
-    System.out.println(randomUserAgent);
-
     try {
       return Jsoup.connect(url)
           .userAgent(randomUserAgent)
