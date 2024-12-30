@@ -66,6 +66,9 @@ public class WarThunder {
       if (imgUrl.startsWith("//")) {
         imgUrl = "https:" + imgUrl;
       }
+      if (imgUrl.contains(" ")) {
+        imgUrl = imgUrl.replace(" ", "%20");
+      }
 
       newsFeed.setImage(imgUrl.isEmpty() ? "No image found" : imgUrl);
 
