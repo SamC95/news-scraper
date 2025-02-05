@@ -79,7 +79,7 @@ public class WarThunder {
           description.isEmpty() ? "No description available" : description);
     }
     else {
-      System.out.printf("[%s] [INFO] No entries found on warthunder.com", LocalTime.now());
+      System.out.printf("[%s] [INFO] No entries found on warthunder.com\n", LocalTime.now());
     }
   }
 
@@ -92,7 +92,7 @@ public class WarThunder {
       getNewsFeed(pinnedEntry, pinnedNewsFeed);
     }
     else {
-      System.out.printf("[%s] [INFO] No pinned entries found on warthunder.com", LocalTime.now());
+      System.out.printf("[%s] [INFO] No pinned entries found on warthunder.com\n", LocalTime.now());
     }
   }
 
@@ -104,7 +104,7 @@ public class WarThunder {
     if (unpinnedEntry != null) {
       getNewsFeed(unpinnedEntry, unpinnedNewsFeed);
     } else {
-      System.out.printf("[%s] [INFO] No unpinned entries found on warthunder.com", LocalTime.now());
+      System.out.printf("[%s] [INFO] No unpinned entries found on warthunder.com\n", LocalTime.now());
     }
   }
 
