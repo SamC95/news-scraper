@@ -15,11 +15,15 @@ import java.time.LocalTime;
 public class WarThunder {
   public final Update pinnedNewsFeed;
   public final Update unpinnedNewsFeed;
+  public final Update pinnedChangelogFeed;
+  public final Update unpinnedChangelogFeed;
   private final JsoupConnector jsoupConnector;
 
   public WarThunder(JsoupConnector jsoupConnector) {
     this.pinnedNewsFeed = new Update();
     this.unpinnedNewsFeed = new Update();
+    this.pinnedChangelogFeed = new Update();
+    this.unpinnedChangelogFeed = new Update();
     this.jsoupConnector = jsoupConnector;
   }
 
@@ -29,9 +33,13 @@ public class WarThunder {
     try {
       warThunder.getPinnedNews();
       warThunder.getUnpinnedNews();
+      warThunder.getPinnedChangelog();
+      warThunder.getUnpinnedChangelog();
 
       PostBuilder.createNewsPost(warThunder.pinnedNewsFeed);
       PostBuilder.createNewsPost(warThunder.unpinnedNewsFeed);
+      PostBuilder.createNewsPost(warThunder.pinnedChangelogFeed);
+      PostBuilder.createNewsPost(warThunder.unpinnedChangelogFeed);
     }
     catch (IOException error) {
       System.err.println("Error: " + error.getMessage());
@@ -103,6 +111,31 @@ public class WarThunder {
 
     if (unpinnedEntry != null) {
       getNewsFeed(unpinnedEntry, unpinnedNewsFeed);
+    } else {
+      System.out.printf("[%s] [INFO] No unpinned entries found on warthunder.com\n", LocalTime.now());
+    }
+  }
+
+  public void getPinnedChangelog() throws IOException {
+    String url = "https://warthunder.com/en/game/changelog/";
+    var doc = jsoupConnector.connect(url, "warthunder.com");
+    Element pinnedEntry = getEntry(doc, true);
+
+    if (pinnedEntry != null) {
+      getNewsFeed(pinnedEntry, pinnedChangelogFeed);
+    }
+    else {
+      System.out.printf("[%s] [INFO] No pinned entries found on warthunder.com\n", LocalTime.now());
+    }
+  }
+
+  public void getUnpinnedChangelog() throws IOException {
+    String url = "https://warthunder.com/en/game/changelog/";
+    var doc = jsoupConnector.connect(url, "warthunder.com");
+    Element unpinnedEntry = getEntry(doc, false);
+
+    if (unpinnedEntry != null) {
+      getNewsFeed(unpinnedEntry, unpinnedChangelogFeed);
     } else {
       System.out.printf("[%s] [INFO] No unpinned entries found on warthunder.com\n", LocalTime.now());
     }
