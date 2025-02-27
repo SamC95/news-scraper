@@ -38,7 +38,7 @@ public class NewsScraperApplication {
 
         Overwatch overwatch = new Overwatch(new JsoupConnector());
 
-        overwatch.getNewsFeed();
+        overwatch.getPatchNotes();
 
         SatisfactoryGame satisfactoryGame = new SatisfactoryGame(new JsoupConnector());
 
