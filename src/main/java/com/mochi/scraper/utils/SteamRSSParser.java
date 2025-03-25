@@ -1,6 +1,6 @@
-package com.example.scraper.utils;
+package com.mochi.scraper.utils;
 
-import com.example.scraper.model.Update;
+import com.mochi.scraper.model.Update;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Element;
 

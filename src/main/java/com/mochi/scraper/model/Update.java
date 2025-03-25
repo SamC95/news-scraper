@@ -1,4 +1,4 @@
-package com.example.scraper.model;
+package com.mochi.scraper.model;
 
 public class Update {
     private String author;

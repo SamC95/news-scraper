@@ -1,16 +1,16 @@
-package com.example.scraper;
+package com.mochi.scraper;
 
-import com.example.scraper.data.FinalFantasyXI;
-import com.example.scraper.data.FinalFantasyXIV;
-import com.example.scraper.data.HellLetLoose;
-import com.example.scraper.data.MonsterHunterWilds;
-import com.example.scraper.data.Overwatch;
-import com.example.scraper.data.SatisfactoryGame;
-import com.example.scraper.data.TheOldRepublic;
-import com.example.scraper.data.WarThunder;
-import com.example.scraper.data.WorldOfWarcraft;
-import com.example.scraper.utils.JsoupConnector;
-import com.example.scraper.utils.SteamRSSParser;
+import com.mochi.scraper.data.FinalFantasyXI;
+import com.mochi.scraper.data.FinalFantasyXIV;
+import com.mochi.scraper.data.HellLetLoose;
+import com.mochi.scraper.data.MonsterHunterWilds;
+import com.mochi.scraper.data.Overwatch;
+import com.mochi.scraper.data.SatisfactoryGame;
+import com.mochi.scraper.data.TheOldRepublic;
+import com.mochi.scraper.data.WarThunder;
+import com.mochi.scraper.data.WorldOfWarcraft;
+import com.mochi.scraper.utils.JsoupConnector;
+import com.mochi.scraper.utils.SteamRSSParser;
 
 import java.io.IOException;
 

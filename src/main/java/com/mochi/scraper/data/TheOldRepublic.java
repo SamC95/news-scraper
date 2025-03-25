@@ -1,9 +1,9 @@
-package com.example.scraper.data;
+package com.mochi.scraper.data;
 
-import com.example.scraper.model.Update;
-import com.example.scraper.utils.DescriptionBuilder;
-import com.example.scraper.utils.JsoupConnector;
-import com.example.scraper.utils.PostBuilder;
+import com.mochi.scraper.model.Update;
+import com.mochi.scraper.utils.DescriptionBuilder;
+import com.mochi.scraper.utils.JsoupConnector;
+import com.mochi.scraper.utils.PostBuilder;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Element;
 

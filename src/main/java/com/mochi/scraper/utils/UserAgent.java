@@ -1,4 +1,4 @@
-package com.example.scraper.utils;
+package com.mochi.scraper.utils;
 
 import java.util.Random;
 

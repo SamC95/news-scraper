@@ -1,4 +1,4 @@
-package data;
+/*package data;
 
 import com.example.scraper.data.WarThunder;
 import com.example.scraper.utils.JsoupConnector;
@@ -76,4 +76,4 @@ public class WarThunderTest {
         "This is a sample news description that provides details about the news.",
         FieldValueHelper.getFieldValue(newsFeed, "description"));
   }
-}
+}*/

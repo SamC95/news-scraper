@@ -1,7 +1,7 @@
 package data;
 
-import com.example.scraper.data.WorldOfWarcraft;
-import com.example.scraper.utils.JsoupConnector;
+import com.mochi.scraper.data.WorldOfWarcraft;
+import com.mochi.scraper.utils.JsoupConnector;
 import org.jsoup.nodes.Document;
 import org.jsoup.parser.Parser;
 import org.junit.jupiter.api.BeforeEach;

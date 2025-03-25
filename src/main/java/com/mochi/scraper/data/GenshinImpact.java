@@ -1,8 +1,8 @@
-package com.example.scraper.data;
+package com.mochi.scraper.data;
 
-import com.example.scraper.model.Update;
-import com.example.scraper.utils.PostBuilder;
-import com.example.scraper.utils.PlaywrightConnector;
+import com.mochi.scraper.model.Update;
+import com.mochi.scraper.utils.PostBuilder;
+import com.mochi.scraper.utils.PlaywrightConnector;
 import com.microsoft.playwright.ElementHandle;
 
 import java.io.IOException;
