@@ -26,6 +26,10 @@ public class PostBuilder {
       System.out.println("Description: " + post.getDescription());
     }
 
+    if (post.getCategory() != null) {
+      System.out.println("Category: " + post.getCategory());
+    }
+
     System.out.print("\n");
   }
 }

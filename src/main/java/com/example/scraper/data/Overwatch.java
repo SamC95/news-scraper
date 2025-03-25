@@ -5,7 +5,6 @@ import com.example.scraper.model.Update;
 import com.example.scraper.utils.JsoupConnector;
 import com.example.scraper.utils.PostBuilder;
 import org.jsoup.Jsoup;
-import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 
 import java.io.IOException;
