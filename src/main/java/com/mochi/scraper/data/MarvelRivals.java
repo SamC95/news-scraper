@@ -13,12 +13,14 @@ public class MarvelRivals {
   public final Update announcementFeed;
   public final Update devDiaryFeed;
   public final Update updateFeed;
+  public final Update balanceFeed;
   private final JsoupConnector jsoupConnector;
 
   public MarvelRivals(JsoupConnector jsoupConnector) {
     this.announcementFeed = new Update();
     this.devDiaryFeed = new Update();
     this.updateFeed = new Update();
+    this.balanceFeed = new Update();
     this.jsoupConnector = jsoupConnector;
   }
 
@@ -26,7 +28,7 @@ public class MarvelRivals {
     MarvelRivals marvelRivals = new MarvelRivals(new JsoupConnector());
 
     try {
-      marvelRivals.getFeed("https://www.marvelrivals.com/news/", marvelRivals.announcementFeed);
+      marvelRivals.getFeed("https://www.marvelrivals.com/announcements/", marvelRivals.announcementFeed);
       PostBuilder.createNewsPost(marvelRivals.announcementFeed);
 
       marvelRivals.getFeed("https://www.marvelrivals.com/devdiaries/", marvelRivals.devDiaryFeed);
@@ -34,6 +36,9 @@ public class MarvelRivals {
 
       marvelRivals.getFeed("https://www.marvelrivals.com/gameupdate/", marvelRivals.updateFeed);
       PostBuilder.createNewsPost(marvelRivals.updateFeed);
+
+      marvelRivals.getFeed("https://www.marvelrivals.com/balancepost/", marvelRivals.balanceFeed);
+      PostBuilder.createNewsPost(marvelRivals.balanceFeed);
     }
     catch (IOException error) {
       System.err.println("Scraper Error: " + error.getMessage());
