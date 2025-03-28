@@ -6,6 +6,7 @@ import com.mochi.scraper.utils.PlaywrightConnector;
 import com.microsoft.playwright.ElementHandle;
 
 import java.io.IOException;
+import java.time.LocalTime;
 
 public class GenshinImpact {
     public final Update newsFeed;
@@ -25,7 +26,7 @@ public class GenshinImpact {
             PostBuilder.createNewsPost(genshinImpact.newsFeed);
         }
         catch (IOException e) {
-            System.err.println("[%s] [ERROR] " + e.getMessage());
+            System.err.printf("[%s] [ERROR] %s\n", LocalTime.now(), e.getMessage());
         }
     }
 
