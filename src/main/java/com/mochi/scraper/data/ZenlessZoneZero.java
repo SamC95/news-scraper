@@ -4,6 +4,7 @@ import com.microsoft.playwright.ElementHandle;
 import com.mochi.scraper.model.Update;
 import com.mochi.scraper.utils.PlaywrightConnector;
 import com.mochi.scraper.utils.PostBuilder;
+import com.mochi.scraper.utils.TextFormatter;
 
 import java.io.IOException;
 import java.time.LocalTime;
@@ -39,8 +40,7 @@ public class ZenlessZoneZero {
 
         if (entry != null) {
             String title = entry.querySelector(".news-list__item-title").textContent();
-            title = title.replaceAll("\\s+", " ");
-            title = title.replaceAll("^\\s+", "");
+            title = TextFormatter.removeWhiteSpace(title);
             this.newsFeed.setTitle(title);
 
             String imgUrl = entry.querySelector(".news-list__item-banner img").getAttribute("src");
@@ -54,8 +54,7 @@ public class ZenlessZoneZero {
             this.newsFeed.setDescription(description);
 
             String category = entry.querySelector(".news-tag").textContent();
-            category = category.replaceAll("\\s+", " ");
-            category = category.replaceAll("^\\s+", "");
+            category = TextFormatter.removeWhiteSpace(category);
             this.newsFeed.setCategory(category);
         }
 
