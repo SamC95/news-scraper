@@ -38,7 +38,7 @@ public class PlaywrightConnector {
 
       return page;
     } catch (Exception e) {
-      System.err.printf("[%s] [ERROR] Selenium failed to connect to %s\n", LocalTime.now(), url);
+      System.err.printf("[%s] [ERROR] Playwright failed to connect to %s\n", LocalTime.now(), url);
     }
     return null;
   }

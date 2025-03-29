@@ -18,7 +18,8 @@ public class JsoupConnector {
               "text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,*/*;q=0.8")
           .header("Referer", "https://www.google.com")
           .get();
-    } catch (IOException error) {
+    }
+    catch (IOException error) {
       throw new IOException("Couldn't connect to " + domain + ": " + error.getMessage());
     }
   }
