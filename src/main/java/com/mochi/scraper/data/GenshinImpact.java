@@ -35,7 +35,7 @@ public class GenshinImpact {
 
         var page = playwrightConnector.connect(url);
 
-        ElementHandle entry = page.querySelector("li.news__item.news__tag-2");
+        ElementHandle entry = page.querySelector("li.news__item");
 
         if (entry != null) {
             String title = entry.querySelector("h3").textContent();
