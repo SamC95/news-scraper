@@ -84,7 +84,7 @@ public class WarThunder {
       description = Jsoup.parse(description).text();
       description = DescriptionBuilder.truncateDescription(description, 300);
       newsFeed.setDescription(
-          description.isEmpty() ? "No description available" : description);
+              description.isEmpty() ? "No description available" : description);
     }
     else {
       System.out.printf("[%s] [INFO] No entries found on warthunder.com\n", LocalTime.now());

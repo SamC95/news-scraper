@@ -32,9 +32,9 @@ public class PlaywrightConnector {
                           "Referer", "https://www.google.com")));
 
       page = context.newPage();
-      page.navigate(url);
+      page.navigate(url, new Page.NavigateOptions().setTimeout(45000));
 
-      page.waitForLoadState(LoadState.NETWORKIDLE);
+      page.waitForLoadState(LoadState.NETWORKIDLE, new Page.WaitForLoadStateOptions().setTimeout(45000));
 
       return page;
     } catch (Exception e) {

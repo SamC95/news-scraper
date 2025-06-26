@@ -49,7 +49,7 @@ public class NewsScraperApplication {
 
         theOldRepublic.getNewsFeed();
 
-        WarThunder warThunder = new WarThunder(new JsoupConnector());
+    WarThunder warThunder = new WarThunder(new JsoupConnector());
 
         warThunder.getPinnedNews();
         warThunder.getUnpinnedNews();
