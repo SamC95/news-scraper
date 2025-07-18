@@ -68,16 +68,16 @@ public class Overwatch {
 
     var doc = jsoupConnector.connect(url, "overwatch.blizzard.com");
 
-    Element entry = doc.selectFirst("blz-card[slot=gallery-items]");
+    Element entry = doc.selectFirst("a[slot=gallery-items]");
 
     if (entry != null) {
-      var title = entry.select("h4[slot=heading]").text();
+      var title = entry.select("h3[slot=heading]").text();
       this.newsFeed.setTitle(title.isEmpty() ? "No title available" : title);
 
       var postLink = entry.attr("href");
       this.newsFeed.setUrl(postLink.isEmpty() ? "No url found" : "https://overwatch.blizzard.com" + postLink);
 
-      var imgUrl = entry.select("blz-image[slot=image]").attr("src");
+      var imgUrl = entry.select("blz-image[slot=media]").attr("src");
       this.newsFeed.setImage(imgUrl.isEmpty() ? "No image available" : imgUrl);
     }
     else {
