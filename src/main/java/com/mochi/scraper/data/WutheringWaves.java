@@ -79,6 +79,6 @@ public class WutheringWaves {
 
     int height = (int) dimensions.get("height");
 
-    return height >= 600;
+    return height >= 1200;
   }
 }
