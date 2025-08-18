@@ -2,6 +2,7 @@ package com.mochi.scraper.data;
 
 import com.microsoft.playwright.ElementHandle;
 import com.microsoft.playwright.JSHandle;
+import com.microsoft.playwright.TimeoutError;
 import com.mochi.scraper.model.Update;
 import com.mochi.scraper.utils.PlaywrightConnector;
 import com.mochi.scraper.utils.PostBuilder;
@@ -52,14 +53,20 @@ public class WutheringWaves {
       page.waitForTimeout(1000);
       this.newsFeed.setUrl(page.url());
 
-      page.waitForSelector(".news-content img");
-      ElementHandle firstImage = page.querySelector(".news-content img");
+      try {
+        page.waitForSelector(".news-content img");
+        ElementHandle firstImage = page.querySelector(".news-content img");
 
-      var exceedsHeightLimit = evaluateHeight(firstImage);
+        var exceedsHeightLimit = evaluateHeight(firstImage);
 
-      if (!exceedsHeightLimit) {
-        String imgUrl = firstImage != null ? firstImage.getAttribute("src") : null;
-        this.newsFeed.setImage(imgUrl);
+        if (!exceedsHeightLimit) {
+          String imgUrl = firstImage != null ? firstImage.getAttribute("src") : null;
+          this.newsFeed.setImage(imgUrl);
+        }
+      } catch (TimeoutError err) {
+        System.out.printf(
+            "[%s] [WARNING] No image or failed to retrieve image for current Wuthering Waves post\n",
+            LocalTime.now());
       }
     } else {
       System.err.printf("[%s] [ERROR] Failed to get Wuthering Waves news feed", LocalTime.now());
